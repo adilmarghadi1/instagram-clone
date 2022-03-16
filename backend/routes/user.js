@@ -26,4 +26,7 @@ router.post('/register', async (req, res) => {
 
 // Login Section
 
-router.post('/login')
+router.post('/login', async (req, res) => {
+    const {email, password} = req.body
+    
+})
