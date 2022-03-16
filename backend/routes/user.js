@@ -30,7 +30,27 @@ router.post('/login', async (req, res) => {
     const {email, password} = req.body
 
     try {
-        let us
+        let user = await User.findOne({email})
+        if (!user) {
+            return res.status(400).json({error : "Invalid Credentials"})
+        }
+
+        const isMatched = await bcrypt.compareSync(password, user.password)
+        if (!isMatched) {
+            return res.status(400).json({error : "Invalid Credentials"})
+        }
+
+        const token = await jwt.sign({_id : user._id}, process.env.JWT_SECRET, {
+            expiresIn : "1h"
+        })
+        res.json({user})
+    }
+
+    catch (err) {
+        console.log(err)
     }
 
 })
+
+module.exports = router
+
