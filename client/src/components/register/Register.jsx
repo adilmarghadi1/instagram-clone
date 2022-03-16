@@ -67,20 +67,23 @@ function Register(props) {
           <div className='line1'></div>
         </div>
 
+        <form onSubmit={handleSubmit}>
 
         <div className='inputs'>
             
-          <input type="text" placeholder='Mobile Number Or Email' />
-          <input type="text" placeholder='Full Name' />
-          <input type="text" placeholder='Username' />
-          <input type="password" placeholder='Password' />
+          {/* <input type="text" placeholder='Mobile Number Or Email' /> */}
+          <input type="text" value={name} name="name" onChange={handleChange} placeholder='Full Name' />
+          <input type="email" name="email" value={email} onChange={handleChange}  placeholder='Username' />
+          <input type="password" name="password"
+            value={password}
+            onChange={handleChange} placeholder='Password' />
 
         </div>
 
         <div className='btn22'>
-            <a href="#">Sign Up</a>
+            <button>Sign Up</button>
         </div>
-
+      </form>
         <p className='text1'>By signing up, you agree to our Terms , Data Policy and Cookies Policy .</p>
         </div>
          

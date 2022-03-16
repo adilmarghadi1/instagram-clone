@@ -55,16 +55,15 @@ router.post('/login', async (req, res) => {
 })
 
 
-router.get('/', requireLogin, async (req, res) => {
+router.get("/", requireLogin, async (req, res) => {
     console.log(req.user)
-
     try {
-        res.json(user)
+      const user = await User.findById(req.user._id).select("-password")
+      res.json(user)
+    } catch (err) {
+      console.log(err)
     }
-    catch(err) {
-        console.log(err)
-    }
-})
+  })
 
 module.exports = router
 

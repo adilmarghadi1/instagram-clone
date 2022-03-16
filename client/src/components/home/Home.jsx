@@ -18,20 +18,51 @@ import img18 from '../../images/img18.jpg'
 import adilimg from '../../images/adil.jfif'
 
 import {   BiDotsHorizontalRounded } from "react-icons/bi";
+import { useNavigate } from 'react-router-dom';
 
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react"
+
 import { Swiper, SwiperSlide } from "swiper/react";
  
 import { Pagination, Navigation } from "swiper";
 import "swiper/css";
+import axios from 'axios'
 // import "swiper/css/navigation";
 // import 'swiper/css/pagination';
 
-export default function Home() {
+const Home = props => {
+
+  let navigate = useNavigate();
+  
+  const [user, setUser] = useState(null)
+
+  const getUser = async () => {
+    const res = await axios.get("/auth", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    setUser(res.data)
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
+
+  const logout = () => {
+    localStorage.removeItem("token")
+    navigate("/login")
+
+  }
+  if (!localStorage.getItem("token")) {
+    navigate("/login")
+
+  }
     return (
         <div>
             <Navbar />
+
            <div className='container1'>
                 <div className='box1'>
 
@@ -99,6 +130,8 @@ export default function Home() {
                     </SwiperSlide>
 </Swiper>
                 </div>
+      <p>Welcome {user && user.name}</p>
+                <button onClick={logout}>Logout</button>
         <div className='right3'>
           <div className='flex4'>
             <img src={adilimg} alt='profile' />
@@ -192,3 +225,5 @@ tiffintech</span> Monday vibes! Which mood are you today?!
          
     )
 }
+
+export default Home;

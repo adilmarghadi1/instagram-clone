@@ -5,7 +5,40 @@ import img2 from '../../images/img2.png'
 import img3 from '../../images/img3.png'
 import Register from '../register/Register'
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
-function Login() {
+import React, { useState } from "react"
+import axios from "axios"
+import { useNavigate } from 'react-router-dom';
+
+function Login(props) {
+  let navigate = useNavigate();
+
+  const [data, setData] = useState({    
+    email: "",
+    password: "",
+  })
+
+  const { email, password } = data
+
+  const handleChange = e =>
+    setData({ ...data, [e.target.name]: e.target.value })
+  const handleSubmit = async e => {
+    e.preventDefault()
+
+    try {
+      const res = await axios.post(
+        "/auth/login",
+        { email, password },
+        { headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin': '*', } }
+
+      )
+      localStorage.setItem("token", res.data.token)
+      navigate("/")
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
 
     <div className="container11">
@@ -20,19 +53,24 @@ function Login() {
             
              
 
-        
-
+      <form onSubmit={handleSubmit}>        
         <div className='inputs'>
             
-          <input type="text" placeholder='Mobile Number Or Email' />
-          <input type="password" placeholder='Password' />
+          <input  type="email"
+            name="email"
+            value={email}
+            onChange={handleChange} placeholder='Mobile Number Or Email' required/>
+          <input  type="password"
+            name="password"
+            value={password}
+            onChange={handleChange} placeholder='Password' required/>
 
         </div>
 
         <div className='btn2'>
-            <a href="#">Login</a>
+            <button>Login</button>
         </div>
-
+      </form>
         <div className="or">
           <div className='line1'></div>
           <h3>OR</h3>

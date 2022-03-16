@@ -110,11 +110,13 @@ body {
 }
 
 
-.btn2 a {
-    padding:5px 9px;
+.btn2 button {
+    padding:8px 9px;
+    border: 0;
+    cursor: pointer;
     border-radius: 5px;
     text-align: center;
-    width: 70%;
+    width: 75%;
     text-decoration: none;
     margin-top: 12px;
     background-color: #B2DFFC;
