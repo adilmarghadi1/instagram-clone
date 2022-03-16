@@ -26,3 +26,4 @@ router.post('/register', async (req, res) => {
 
 // Login Section
 
+router.post('/login')
