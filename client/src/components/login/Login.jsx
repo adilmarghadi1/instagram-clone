@@ -9,7 +9,8 @@ import React, { useState } from "react"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 
-function Login(props) {
+const Login = props => {
+
   let navigate = useNavigate();
 
   const [data, setData] = useState({    
@@ -19,16 +20,18 @@ function Login(props) {
 
   const { email, password } = data
 
-  const handleChange = e =>
-    setData({ ...data, [e.target.name]: e.target.value })
-  const handleSubmit = async e => {
+  const handleChange = (e)  => {
+     setData({ ...data, [e.target.name]: e.target.value })
+     
+  }
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
       const res = await axios.post(
         "/auth/login",
         { email, password },
-        { headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin': '*', } }
+        { headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin': '*' } }
 
       )
       localStorage.setItem("token", res.data.token)

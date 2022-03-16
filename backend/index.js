@@ -18,9 +18,7 @@ mongoose.connect(process.env.MONGO_URI,
         console.log("Connected Successfully to MongoDB")
     });
 
-app.get('/', (req, res)=> {
-    res.send("Hello adil")
-})
+ 
 
 app.listen(PORT, ()=> {
     console.log(`Server run on ${PORT}`)

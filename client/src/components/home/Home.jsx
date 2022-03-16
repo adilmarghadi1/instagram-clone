@@ -130,8 +130,8 @@ const Home = props => {
                     </SwiperSlide>
 </Swiper>
                 </div>
-      <p>Welcome {user && user.name}</p>
-                <button onClick={logout}>Logout</button>
+      {/* <p>Welcome {user && user.name}</p>
+                <button onClick={logout}>Logout</button> */}
         <div className='right3'>
           <div className='flex4'>
             <img src={adilimg} alt='profile' />
@@ -185,7 +185,10 @@ const Home = props => {
     
 
 
-
+ <div>
+      <p>Welcome {user && user.name}</p>
+      <button onClick={logout}>Logout</button>
+    </div>
 
     <div className='box4'>
           <div className='top'>
