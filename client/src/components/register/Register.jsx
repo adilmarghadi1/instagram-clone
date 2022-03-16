@@ -27,9 +27,10 @@ function Register(props) {
 
   
   const handleSubmit = async (e) => {
-    if (data.name === "" || data.email === "" || data) {
-      alert("Empty")
-      };
+    if (data.name === "" || data.email === "" || data.password=== "") {
+      alert("Please Enter A Valid Input")
+      }
+
 
     
     e.preventDefault()

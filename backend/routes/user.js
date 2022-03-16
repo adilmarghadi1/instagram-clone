@@ -30,33 +30,25 @@ router.post("/register", async (req, res) => {
 
 // Login Section
 
-router.post('/login', async (req, res) => {
-    const {email, password} = req.body
-
-    try {
-        let user = await User.findOne({email})
-        if (!user) {
-            return res.status(400).json({error : "Invalid Credentials"})
-        }
-
-        const isMatched = await bcrypt.compareSync(password, user.password)
-        if (!isMatched) {
-            return res.status(400).json({error : "Invalid Credentials"})
-        }
-
-        const token = await jwt.sign({_id : user._id}, process.env.JWT_SECRET, {
-            expiresIn : "1h"
-        })
-        res.json({user})
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body
+  try {
+    let user = await User.findOne({ email })
+    if (!user) {
+      return res.status(400).json({ error: "Invalid Credentials" })
     }
-
-    catch (err) {
-        console.log(err)
+    const isMatched = await bcrypt.compareSync(password, user.password)
+    if (!isMatched) {
+      return res.status(400).json({ error: "Invalid Credentials" })
     }
-
+    const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    })
+    res.json({ token })
+  } catch (err) {
+    console.log(err)
+  }
 })
-
-
 router.get("/", requireLogin, async (req, res) => {
   console.log(req.user)
   try {

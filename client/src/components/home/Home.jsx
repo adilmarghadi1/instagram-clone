@@ -49,8 +49,11 @@ const Home = props => {
 
   useEffect(() => {
     getUser()
-     
+    if (!localStorage.getItem("token")) {
+      navigate("/login")
+    }
   }, [])
+
  
 
  function Logout(){
@@ -58,15 +61,13 @@ const Home = props => {
      navigate("/login")
 
   }
-  if (!localStorage.getItem("token")) {
-    navigate("/login")
-  }
+   
   
   
     return (
         <div>
             <Navbar />
-
+       
            <div className='container1'>
                 <div className='box1'>
 

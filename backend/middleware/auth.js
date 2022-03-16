@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken")
+require('dotenv').config()
 
 exports.requireLogin = (req, res, next) => {
   try {

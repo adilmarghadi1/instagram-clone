@@ -26,18 +26,20 @@ const Login = props => {
      
   }
   const handleSubmit = async (e) => {
+    if (data.email === "" ||data.password=== "") {
+      alert("Please Enter A Valid Input")
+      }
     e.preventDefault()
+
 
     try {
       const res = await axios.post(
         "/auth/login",
         { email, password },
-        { headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin': '*' } }
-
+        { headers: { "Content-Type": "application/json" } }
       )
       localStorage.setItem("token", res.data.token)
       navigate("/")
-
     } catch (err) {
       console.log(err)
     }
