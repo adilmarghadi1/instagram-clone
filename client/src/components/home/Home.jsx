@@ -25,7 +25,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
  
 import { Pagination, Navigation } from "swiper";
 import "swiper/css";
-import "swiper/css/navigation";
+// import "swiper/css/navigation";
 // import 'swiper/css/pagination';
 
 export default function Home() {
@@ -36,7 +36,7 @@ export default function Home() {
                 <div className='box1'>
 
       <Swiper
-        slidesPerView={8}
+        slidesPerView={9}
         spaceBetween={30}
         slidesPerGroup={2}
         loop={true}
