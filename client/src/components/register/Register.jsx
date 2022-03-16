@@ -24,7 +24,14 @@ function Register(props) {
     setData({...data, [e.target.name] : e.target.value})
   }
 
+
+  
   const handleSubmit = async (e) => {
+    if (data.name === "" || data.email === "" || data) {
+      alert("Empty")
+      };
+
+    
     e.preventDefault()
 
     try {

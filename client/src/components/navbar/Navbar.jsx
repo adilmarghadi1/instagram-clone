@@ -13,8 +13,16 @@ import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import adilimg from '../../images/adil.jfif'
 
-export default function Navbar() {
+import { useNavigate } from 'react-router-dom';
 
+
+export default function Navbar() {
+  let navigate = useNavigate();
+  async function Logout(){
+    localStorage.removeItem("token")
+    await navigate("/login")
+
+  }
     const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -113,7 +121,8 @@ export default function Navbar() {
         <MenuItem>
           <ListItemIcon>
           </ListItemIcon>
-          Logout
+          <a onClick={Logout}>Logout</a>
+
         </MenuItem>
       </Menu>
             </div>

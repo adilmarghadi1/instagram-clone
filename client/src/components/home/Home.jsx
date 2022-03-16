@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import './home.css'
 import Navbar from  '../navbar/Navbar'
 import img5 from '../../images/img5.jpg'
@@ -18,7 +19,7 @@ import img18 from '../../images/img18.jpg'
 import adilimg from '../../images/adil.jfif'
 
 import {   BiDotsHorizontalRounded } from "react-icons/bi";
-import { useNavigate } from 'react-router-dom';
+
 
 
 import React, { useEffect, useState } from "react"
@@ -48,17 +49,20 @@ const Home = props => {
 
   useEffect(() => {
     getUser()
+     
   }, [])
+ 
 
-  const logout = () => {
+ function Logout(){
     localStorage.removeItem("token")
-    navigate("/login")
+     navigate("/login")
 
   }
   if (!localStorage.getItem("token")) {
     navigate("/login")
-
   }
+  
+  
     return (
         <div>
             <Navbar />
@@ -130,8 +134,7 @@ const Home = props => {
                     </SwiperSlide>
 </Swiper>
                 </div>
-      {/* <p>Welcome {user && user.name}</p>
-                <button onClick={logout}>Logout</button> */}
+  
         <div className='right3'>
           <div className='flex4'>
             <img src={adilimg} alt='profile' />
@@ -186,8 +189,6 @@ const Home = props => {
 
 
  <div>
-      <p>Welcome {user && user.name}</p>
-      <button onClick={logout}>Logout</button>
     </div>
 
     <div className='box4'>
