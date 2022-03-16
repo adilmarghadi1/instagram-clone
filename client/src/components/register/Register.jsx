@@ -4,8 +4,47 @@ import './register.css'
 import img2 from '../../images/img2.png'
 import img3 from '../../images/img3.png'
 import Login from '../login/Login'
-import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
-function register() {
+import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from 'react-router-dom'
+
+import React, {useState} from 'react'
+import axios from 'axios'
+function Register(props) {
+  
+  let navigate = useNavigate();
+
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  })
+
+  const {name, email, password} = data
+
+  const handleChange = (e) => {
+    setData({...data, [e.target.name] : e.target.value})
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      await axios.post("/auth/register", {
+        name, email, password
+      },
+
+      {headers : {"Content-Type" : "application/json",'Access-Control-Allow-Origin': '*' }}
+      
+      )
+
+      navigate("/login")
+    }
+
+    catch(err) {
+      console.log(err)
+    }
+  }
+
+
   return (
 
     <div className="container10">
@@ -62,4 +101,4 @@ function register() {
   );
 }
 
-export default register;
+export default Register;
